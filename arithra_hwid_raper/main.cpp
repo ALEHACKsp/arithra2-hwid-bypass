@@ -30,7 +30,8 @@ void start()
     freopen("CONOUT$", "w", stderr);
     SetConsoleTitleA("lel!");
     std::cout << "hooking" << std::endl;
-    auto base = GetModuleHandleA("Arithra2-Client.exe");
+
+    auto base = 0x540000;
     printf("based in: %p func in: %p\n", base, 0x143130 + base);
 
     rand_hwid = gen_random(36);
@@ -39,25 +40,17 @@ void start()
 
     BYTE b1 = 0, b2 = 0;
 
-    b1 = *(BYTE*)(0x683130);
-    b2 = *(BYTE*)(0x683130 + 1);
+    b1 = *(BYTE*)(0x143130+base);
+    b2 = *(BYTE*)(0x143130 + base + 1);
 
     printf("b1: %02x %02x\n", b1, b2);
 
-
-    /*
-    .text:00543130
-    .text:00543130 ; Attributes: bp-based frame
-    .text:00543130
-    .text:00543130 get_hwid_mixed  proc near               ; CODE XREF: sub_552260+BD↓p
-    .text:00543130
-    */
     MH_Initialize();
-    MH_CreateHook((void*)(0x683130), (void*)f_get_hwid, (void**)&o_get_hwid);
-    MH_EnableHook((void*)(0x683130));
+    MH_CreateHook((void*)(0x143130 + base), (void*)f_get_hwid, (void**)&o_get_hwid);
+    MH_EnableHook((void*)(0x143130 + base));
 
-    b1 = *(BYTE*)(0x683130);
-    b2 = *(BYTE*)(0x683130 + 1);
+    b1 = *(BYTE*)(0x143130 + base);
+    b2 = *(BYTE*)(0x143130 + base + 1);
 
     printf("b1: %02x %02x\n", b1, b2);
 
