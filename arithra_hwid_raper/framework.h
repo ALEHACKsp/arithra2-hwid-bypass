@@ -9,4 +9,7 @@
 #include <sstream>
 #include <fstream>
 #include <MinHook.h>
+#include <thread>
+#include <TlHelp32.h>
+#include <regex>
 #pragma comment(lib, "libMinHook.lib")
