@@ -1,3 +1,5 @@
+#Update => this project no longer works for arithra2.
+
 Project was made in 5 minutes, goal was to bypass Arithra2's HWID system to allow cheating with a new HWID with every loadup.
 
 How to use:
